@@ -14,8 +14,9 @@
                 extend: {
                     fontFamily: { heading:['Space Grotesk','sans-serif'], body:['DM Sans','sans-serif'] },
                     colors: {
-                        sand:{ 50:'#FDFCFA',100:'#F8F4EE',200:'#EFE8DF',300:'#E0D4C5',400:'#C5A47E' },
-                        earth:{ 400:'#B8956A',500:'#A68A76',600:'#8C705F',700:'#6B4D3A',800:'#4A3526',900:'#2C1E14' }
+                        cream: { 50:'#FDFCFA', 100:'#F7F4ED', 200:'#EDE8DB', 300:'#D8D0BF' },
+                        gold: { 200:'#E8D5A8', 300:'#D4BA7A', 400:'#C9A96E', 500:'#A88B4A', 600:'#8B6E3A' },
+                        forest: { 400:'#3D8B6E', 500:'#2D6B56', 600:'#1F4F3D', 700:'#163D30', 800:'#0F2E26', 900:'#091E18' }
                     }
                 }
             }
@@ -24,50 +25,44 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;cursor:none}
-        body{background:#FDFCFA;color:#2C1E14;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+        body{background:#FDFCFA;color:#091E18;font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-        /* ===== PREMIUM GRAIN OVERLAY ===== */
-        body::after{content:'';position:fixed;inset:0;z-index:100000;pointer-events:none;opacity:.035;
-            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        body::after{content:'';position:fixed;inset:0;z-index:100000;pointer-events:none;opacity:.03;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* ===== CUSTOM CURSOR ===== */
-        .cursor-dot{width:8px;height:8px;background:#2C1E14;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform .1s}
-        .cursor-ring{width:44px;height:44px;border:1.5px solid rgba(197,164,126,.35);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .35s,height .35s,border-color .35s,background .35s}
-        .cursor-ring.hovering{width:68px;height:68px;background:rgba(197,164,126,.08);border-color:rgba(197,164,126,.6)}
+        .cursor-dot{width:8px;height:8px;background:#091E18;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform .1s}
+        .cursor-ring{width:44px;height:44px;border:1.5px solid rgba(201,169,110,.3);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .35s,height .35s,border-color .35s,background .35s}
+        .cursor-ring.hovering{width:68px;height:68px;background:rgba(45,107,86,.06);border-color:rgba(45,107,86,.4)}
         @media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}html{cursor:auto}}
         @media(pointer:fine){a,button,.interactive{cursor:none}}
 
-        /* ===== PRELOADER ===== */
         .preloader{position:fixed;inset:0;background:#FDFCFA;z-index:10000;display:flex;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
         .preloader.hidden{opacity:0;visibility:hidden}
         .preloader-cube{width:44px;height:44px;transform-style:preserve-3d;animation:cubeRotate 1.6s ease-in-out infinite}
-        .preloader-cube div{position:absolute;width:44px;height:44px;border:1.5px solid #C5A47E;background:rgba(197,164,126,.03);backdrop-filter:blur(2px)}
+        .preloader-cube div{position:absolute;width:44px;height:44px;border:1.5px solid #2D6B56;background:rgba(45,107,86,.03)}
         .preloader-cube .front{transform:translateZ(22px)}.preloader-cube .back{transform:rotateY(180deg) translateZ(22px)}
         .preloader-cube .right{transform:rotateY(90deg) translateZ(22px)}.preloader-cube .left{transform:rotateY(-90deg) translateZ(22px)}
         .preloader-cube .top{transform:rotateX(90deg) translateZ(22px)}.preloader-cube .bottom{transform:rotateX(-90deg) translateZ(22px)}
         @keyframes cubeRotate{0%{transform:rotateX(0) rotateY(0)}50%{transform:rotateX(180deg) rotateY(180deg)}100%{transform:rotateX(360deg) rotateY(360deg)}}
 
-        /* ===== MOTION GRADIENT ORBS ===== */
-        .motion-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;will-change:transform}
+        .motion-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;will-change:transform}
         @keyframes floatOrb1{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-40px) scale(1.1)}50%{transform:translate(-30px,50px) scale(.95)}75%{transform:translate(40px,20px) scale(1.05)}}
         @keyframes floatOrb2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-50px,30px) scale(1.08)}66%{transform:translate(40px,-40px) scale(.92)}}
 
-        /* ===== 3D SHAPES ===== */
         .scene-3d{perspective:1200px;transform-style:preserve-3d}
         .float-shape{transform-style:preserve-3d;transition:transform .3s ease-out}
         .wireframe-cube{width:90px;height:90px;transform-style:preserve-3d;animation:floatSpin 16s linear infinite}
-        .wireframe-cube .face{position:absolute;width:90px;height:90px;border:1px solid rgba(197,164,126,.18);background:rgba(197,164,126,.01)}
+        .wireframe-cube .face{position:absolute;width:90px;height:90px;border:1px solid rgba(45,107,86,.15);background:rgba(45,107,86,.01)}
         .wireframe-cube .f1{transform:translateZ(45px)}.wireframe-cube .f2{transform:rotateY(180deg) translateZ(45px)}
         .wireframe-cube .f3{transform:rotateY(90deg) translateZ(45px)}.wireframe-cube .f4{transform:rotateY(-90deg) translateZ(45px)}
         .wireframe-cube .f5{transform:rotateX(90deg) translateZ(45px)}.wireframe-cube .f6{transform:rotateX(-90deg) translateZ(45px)}
         @keyframes floatSpin{0%{transform:rotateX(15deg) rotateY(0) translateY(0)}25%{transform:rotateX(25deg) rotateY(90deg) translateY(-15px)}50%{transform:rotateX(15deg) rotateY(180deg) translateY(0)}75%{transform:rotateX(5deg) rotateY(270deg) translateY(15px)}100%{transform:rotateX(15deg) rotateY(360deg) translateY(0)}}
-        .ring-3d{width:120px;height:120px;border:1.5px solid rgba(197,164,126,.12);border-radius:50%;transform-style:preserve-3d;animation:ringFloat 10s ease-in-out infinite}
+        .ring-3d{width:120px;height:120px;border:1.5px solid rgba(201,169,110,.1);border-radius:50%;transform-style:preserve-3d;animation:ringFloat 10s ease-in-out infinite}
         @keyframes ringFloat{0%,100%{transform:rotateX(70deg) rotateZ(0) translateY(0)}50%{transform:rotateX(70deg) rotateZ(180deg) translateY(-20px)}}
-        .diamond-3d{width:36px;height:36px;border:1px solid rgba(197,164,126,.15);background:rgba(197,164,126,.01);animation:diamondSpin 8s linear infinite}
+        .diamond-3d{width:36px;height:36px;border:1px solid rgba(201,169,110,.12);background:rgba(201,169,110,.01);animation:diamondSpin 8s linear infinite}
         @keyframes diamondSpin{0%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(225deg) translateY(-10px)}100%{transform:rotate(405deg) translateY(0)}}
 
-        /* ===== SCROLL REVEAL ===== */
         .reveal{opacity:0;transform:translateY(45px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
         .reveal.visible{opacity:1;transform:translateY(0)}
         .reveal-3d{opacity:0;transform:perspective(800px) rotateY(-10deg) translateX(-25px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
@@ -75,441 +70,309 @@
         .reveal-3d-r{opacity:0;transform:perspective(800px) rotateY(10deg) translateX(25px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
         .reveal-3d-r.visible{opacity:1;transform:perspective(800px) rotateY(0) translateX(0)}
 
-        /* ===== TILT CARD ===== */
         .tilt-card{transform-style:preserve-3d;transition:transform .1s ease-out,box-shadow .4s ease}
         .tilt-card .tilt-inner{transform:translateZ(30px);transition:transform .4s ease}
         .tilt-card:hover .tilt-inner{transform:translateZ(40px)}
         .tilt-glare{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(255,255,255,.6) 0%,transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
         .tilt-card:hover .tilt-glare{opacity:.45}
-
         .magnetic-btn{transition:transform .2s ease-out}
 
-        /* ===== MARQUEE ===== */
         .marquee-track{display:flex;animation:marquee 30s linear infinite}
         .marquee-track:hover{animation-play-state:paused}
         @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* ===== HORIZONTAL SCROLL ===== */
         .hscroll-track{display:flex;gap:20px;padding:0 48px;cursor:grab;user-select:none}
         .hscroll-track:active{cursor:grabbing}
+        .hscroll-track.smooth-return{transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
 
-        .form-input{background:transparent;border:none;border-bottom:1px solid rgba(44,30,20,.1);padding:14px 0;font-size:15px;outline:none;width:100%;font-family:'DM Sans',sans-serif;color:#2C1E14;transition:border-color .3s}
-        .form-input:focus{border-bottom-color:#C5A47E}
+        .form-input{background:transparent;border:none;border-bottom:1px solid rgba(9,30,24,.1);padding:14px 0;font-size:15px;outline:none;width:100%;font-family:'DM Sans',sans-serif;color:#091E18;transition:border-color .3s}
+        .form-input:focus{border-bottom-color:#2D6B56}
         .form-input::placeholder{color:#bbb}
 
         @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes scrollDot{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(8px);opacity:.3}}
 
-        .accent-gradient{background:linear-gradient(135deg,#C5A47E,#D4B896,#E5D3B3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .accent-bg{background:linear-gradient(135deg,#2C1E14,#4A3526)}
-        .accent-bg-light{background:linear-gradient(135deg,#C5A47E,#B8956A)}
+        .accent-gradient{background:linear-gradient(135deg,#C9A96E,#D4BA7A,#E8D5A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .accent-bg{background:linear-gradient(135deg,#091E18,#163D30)}
+        .accent-bg-light{background:linear-gradient(135deg,#2D6B56,#1F4F3D)}
 
-        .nav-glass{background:rgba(253,252,250,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(44,30,20,.05);box-shadow:0 8px 32px rgba(44,30,20,.04)}
-        .glass-card{background:rgba(255,255,255,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.4)}
-        .hero-gradient{background:linear-gradient(to bottom,rgba(44,30,20,.72),rgba(44,30,20,.28),rgba(44,30,20,.88))}
+        .nav-glass{background:rgba(253,252,250,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(9,30,24,.05);box-shadow:0 8px 32px rgba(9,30,24,.04)}
+        .glass-card{background:rgba(255,255,255,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.4)}
+        .hero-gradient{background:linear-gradient(to bottom,rgba(9,30,24,.72),rgba(9,30,24,.25),rgba(9,30,24,.88))}
 
         .counter-num{font-variant-numeric:tabular-nums}
-        .pricing-row{transition:background-color .2s}.pricing-row:hover{background-color:rgba(248,244,238,.6)}
-
-        /* ===== PARTICLES CANVAS ===== */
+        .pricing-row{transition:background-color .2s}.pricing-row:hover{background-color:rgba(247,244,237,.6)}
         #particleCanvas{position:absolute;inset:0;pointer-events:none;z-index:2}
 
-        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#E0D4C5;border-radius:2px}
+        /* Gallery scroll indicator */
+        .gallery-progress{height:2px;background:rgba(9,30,24,.06);border-radius:1px;overflow:hidden;margin-top:20px}
+        .gallery-progress-bar{height:100%;background:linear-gradient(90deg,#2D6B56,#C9A96E);border-radius:1px;transition:width .15s ease-out;width:0%}
+
+        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#D8D0BF;border-radius:2px}
     </style>
 </head>
 <body>
 
-<!-- PRELOADER -->
-<div class="preloader" id="preloader">
-    <div class="preloader-cube"><div class="front"></div><div class="back"></div><div class="right"></div><div class="left"></div><div class="top"></div><div class="bottom"></div></div>
-</div>
-
-<!-- CUSTOM CURSOR -->
+<div class="preloader" id="preloader"><div class="preloader-cube"><div class="front"></div><div class="back"></div><div class="right"></div><div class="left"></div><div class="top"></div><div class="bottom"></div></div></div>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ===== NAVIGATION ===== -->
+<!-- ===== NAV ===== -->
 <nav class="fixed top-5 left-1/2 -translate-x-1/2 z-50 nav-glass rounded-full px-2 py-2 flex items-center gap-1" style="animation:fadeUp .8s ease-out .5s both">
     <a href="#" class="flex items-center gap-2 px-4 py-2">
-        <iconify-icon icon="game-icons:comb" width="20" class="text-earth-400"></iconify-icon>
+        <iconify-icon icon="game-icons:comb" width="20" class="text-forest-500"></iconify-icon>
         <span class="font-heading font-bold text-sm tracking-tight">Lumière</span>
     </a>
     <div class="hidden md:flex items-center gap-0.5">
-        <a href="#services" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-earth-900/5 transition-colors">Services</a>
-        <a href="#about" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-earth-900/5 transition-colors">About</a>
-        <a href="#gallery" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-earth-900/5 transition-colors">Gallery</a>
-        <a href="#pricing" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-earth-900/5 transition-colors">Pricing</a>
-        <a href="#contact" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-earth-900/5 transition-colors">Contact</a>
+        <a href="#services" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-forest-900/5 transition-colors">Services</a>
+        <a href="#about" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-forest-900/5 transition-colors">About</a>
+        <a href="#gallery" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-forest-900/5 transition-colors">Gallery</a>
+        <a href="#pricing" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-forest-900/5 transition-colors">Pricing</a>
+        <a href="#contact" class="interactive text-xs font-medium px-4 py-2 rounded-full hover:bg-forest-900/5 transition-colors">Contact</a>
     </div>
     <a href="#booking" class="interactive magnetic-btn accent-bg-light text-white text-xs font-semibold px-5 py-2.5 rounded-full ml-2 hover:opacity-90 transition-opacity">Book Now</a>
     <button id="mobileToggle" class="md:hidden interactive flex flex-col gap-1 px-3 py-2">
-        <span class="block w-5 h-0.5 bg-earth-900 rounded" id="mBar1"></span><span class="block w-5 h-0.5 bg-earth-900 rounded" id="mBar2"></span><span class="block w-3.5 h-0.5 bg-earth-900 rounded" id="mBar3"></span>
+        <span class="block w-5 h-0.5 bg-forest-900 rounded"></span><span class="block w-5 h-0.5 bg-forest-900 rounded"></span><span class="block w-3.5 h-0.5 bg-forest-900 rounded"></span>
     </button>
 </nav>
 
-<!-- Mobile Menu -->
-<div id="mobileMenu" class="fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-sand-50 shadow-2xl z-50 transform translate-x-full transition-transform duration-350 ease-out flex flex-col">
-    <div class="flex items-center justify-between p-6 border-b border-earth-900/10">
-        <span class="font-heading font-semibold">Menu</span>
-        <button id="mobileClose" class="interactive p-2 hover:bg-sand-100 rounded-full"><iconify-icon icon="lucide:x" width="20"></iconify-icon></button>
-    </div>
+<div id="mobileMenu" class="fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-cream-50 shadow-2xl z-50 transform translate-x-full transition-transform duration-350 ease-out flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-forest-900/10"><span class="font-heading font-semibold">Menu</span><button id="mobileClose" class="interactive p-2 hover:bg-cream-100 rounded-full"><iconify-icon icon="lucide:x" width="20"></iconify-icon></button></div>
     <div class="flex flex-col p-6 gap-1">
-        <a href="#services" class="mobile-link py-3 px-4 text-base font-medium hover:bg-sand-100 rounded-xl">Services</a>
-        <a href="#about" class="mobile-link py-3 px-4 text-base font-medium hover:bg-sand-100 rounded-xl">About</a>
-        <a href="#gallery" class="mobile-link py-3 px-4 text-base font-medium hover:bg-sand-100 rounded-xl">Gallery</a>
-        <a href="#pricing" class="mobile-link py-3 px-4 text-base font-medium hover:bg-sand-100 rounded-xl">Pricing</a>
-        <a href="#contact" class="mobile-link py-3 px-4 text-base font-medium hover:bg-sand-100 rounded-xl">Contact</a>
+        <a href="#services" class="mobile-link py-3 px-4 text-base font-medium hover:bg-cream-100 rounded-xl">Services</a>
+        <a href="#about" class="mobile-link py-3 px-4 text-base font-medium hover:bg-cream-100 rounded-xl">About</a>
+        <a href="#gallery" class="mobile-link py-3 px-4 text-base font-medium hover:bg-cream-100 rounded-xl">Gallery</a>
+        <a href="#pricing" class="mobile-link py-3 px-4 text-base font-medium hover:bg-cream-100 rounded-xl">Pricing</a>
+        <a href="#contact" class="mobile-link py-3 px-4 text-base font-medium hover:bg-cream-100 rounded-xl">Contact</a>
     </div>
-    <div class="mt-auto p-6 border-t border-earth-900/10">
-        <a href="#booking" class="mobile-link flex items-center justify-center gap-2 w-full accent-bg-light text-white text-sm font-semibold py-4 rounded-full">Book an Appointment</a>
-    </div>
+    <div class="mt-auto p-6 border-t border-forest-900/10"><a href="#booking" class="mobile-link flex items-center justify-center gap-2 w-full accent-bg-light text-white text-sm font-semibold py-4 rounded-full">Book an Appointment</a></div>
 </div>
-<div id="mobileOverlay" class="fixed inset-0 bg-earth-900/30 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<div id="mobileOverlay" class="fixed inset-0 bg-forest-900/30 z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
 <!-- ===== HERO ===== -->
 <section class="min-h-screen flex items-center relative overflow-hidden">
-    <img src="https://picsum.photos/seed/luxury-salon-interior/1920/1080.jpg" alt="Salon" class="absolute inset-0 w-full h-full object-cover" style="filter:grayscale(15%) sepia(10%)">
+    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80" alt="Luxury salon interior" class="absolute inset-0 w-full h-full object-cover" style="filter:grayscale(15%) sepia(8%)">
     <div class="hero-gradient absolute inset-0"></div>
-
-    <!-- Particle Canvas -->
     <canvas id="particleCanvas"></canvas>
+    <div class="motion-orb w-[500px] h-[500px] bg-forest-500/15 top-[-10%] right-[-5%]" style="animation:floatOrb1 18s ease-in-out infinite"></div>
+    <div class="motion-orb w-[400px] h-[400px] bg-gold-400/12 bottom-[-5%] left-[-5%]" style="animation:floatOrb2 22s ease-in-out infinite"></div>
 
-    <!-- Motion Gradient Orbs -->
-    <div class="motion-orb w-[500px] h-[500px] bg-earth-400/15 top-[-10%] right-[-5%]" style="animation:floatOrb1 18s ease-in-out infinite"></div>
-    <div class="motion-orb w-[400px] h-[400px] bg-sand-300/20 bottom-[-5%] left-[-5%]" style="animation:floatOrb2 22s ease-in-out infinite"></div>
-
-    <!-- 3D Floating Shapes -->
     <div class="absolute inset-0 scene-3d pointer-events-none" id="heroScene">
-        <div class="float-shape absolute top-[12%] right-[10%] hidden lg:block" data-speed="0.04">
-            <div class="wireframe-cube"><div class="face f1"></div><div class="face f2"></div><div class="face f3"></div><div class="face f4"></div><div class="face f5"></div><div class="face f6"></div></div>
-        </div>
-        <div class="float-shape absolute bottom-[18%] right-[18%] hidden lg:block" data-speed="0.06">
-            <div class="ring-3d"></div>
-        </div>
-        <div class="float-shape absolute top-[28%] left-[6%] hidden lg:block" data-speed="0.03">
-            <div class="diamond-3d"></div>
-        </div>
+        <div class="float-shape absolute top-[12%] right-[10%] hidden lg:block" data-speed="0.04"><div class="wireframe-cube"><div class="face f1"></div><div class="face f2"></div><div class="face f3"></div><div class="face f4"></div><div class="face f5"></div><div class="face f6"></div></div></div>
+        <div class="float-shape absolute bottom-[18%] right-[18%] hidden lg:block" data-speed="0.06"><div class="ring-3d"></div></div>
+        <div class="float-shape absolute top-[28%] left-[6%] hidden lg:block" data-speed="0.03"><div class="diamond-3d"></div></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-28 pb-20">
         <div class="max-w-4xl">
             <div style="animation:fadeUp .8s ease-out .8s both">
                 <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-5 py-2 mb-8">
-                    <iconify-icon icon="lucide:award" width="14" class="text-sand-300"></iconify-icon>
-                    <span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-200">Best Salon in NYC — TimeOut 2024</span>
+                    <iconify-icon icon="lucide:award" width="14" class="text-gold-300"></iconify-icon>
+                    <span class="text-[10px] font-bold tracking-[.2em] uppercase text-cream-200">Best Salon in NYC — TimeOut 2024</span>
                 </span>
             </div>
             <h1 class="font-heading text-[clamp(2.6rem,7.5vw,6rem)] font-bold leading-[.93] tracking-tight mb-6 text-white" style="animation:fadeUp .8s ease-out 1s both">
-                Your Most Beautiful<br><span class="accent-gradient" style="-webkit-text-fill-color:unset;background:linear-gradient(135deg,#E5D3B3,#C5A47E);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Self Starts Here</span>
+                Your Most Beautiful<br><span class="accent-gradient">Self Starts Here</span>
             </h1>
-            <p class="text-lg md:text-xl text-white/65 max-w-lg leading-relaxed mb-10" style="animation:fadeUp .8s ease-out 1.2s both">
+            <p class="text-lg md:text-xl text-white/60 max-w-lg leading-relaxed mb-10" style="animation:fadeUp .8s ease-out 1.2s both">
                 Award-winning stylists in the heart of Manhattan. Walk in as you are. Leave as you've always wanted to be.
             </p>
             <div class="flex flex-wrap gap-4" style="animation:fadeUp .8s ease-out 1.4s both">
-                <a href="#booking" class="interactive magnetic-btn bg-white text-earth-900 text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-black/10 transition-all">
-                    Book an Appointment <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
-                </a>
-                <a href="#services" class="interactive magnetic-btn bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-white/20 hover:-translate-y-0.5 transition-all">
-                    Explore Services
-                </a>
+                <a href="#booking" class="interactive magnetic-btn bg-white text-forest-900 text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-black/10 transition-all">Book an Appointment <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon></a>
+                <a href="#services" class="interactive magnetic-btn bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-semibold px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-white/20 hover:-translate-y-0.5 transition-all">Explore Services</a>
             </div>
         </div>
     </div>
-
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10" style="animation:fadeIn 1s ease-out 2s both">
         <span class="text-[10px] tracking-[.2em] uppercase text-white/30">Scroll</span>
-        <div class="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1.5">
-            <div class="w-1 h-1.5 rounded-full bg-sand-300" style="animation:scrollDot 1.5s ease-in-out infinite"></div>
-        </div>
+        <div class="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1.5"><div class="w-1 h-1.5 rounded-full bg-gold-300" style="animation:scrollDot 1.5s ease-in-out infinite"></div></div>
     </div>
 </section>
 
 <!-- ===== MARQUEE ===== -->
-<div class="py-5 border-y border-earth-900/5 overflow-hidden bg-white/80 backdrop-blur-md">
+<div class="py-5 border-y border-forest-900/5 overflow-hidden bg-white/80 backdrop-blur-md">
     <div class="marquee-track whitespace-nowrap">
         <span class="inline-flex items-center gap-6 mx-6">
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Haircuts & Styling</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Color & Highlights</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Nail Care</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Skincare & Facials</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Bridal Packages</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Organic Products</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Haircuts & Styling</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Color & Highlights</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Nail Care</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Skincare & Facials</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Bridal Packages</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Organic Products</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
         </span>
         <span class="inline-flex items-center gap-6 mx-6">
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Haircuts & Styling</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Color & Highlights</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Nail Care</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Skincare & Facials</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Bridal Packages</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
-            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-earth-400/40">Organic Products</span><span class="w-1.5 h-1.5 rounded-full bg-sand-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Haircuts & Styling</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Color & Highlights</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Nail Care</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Skincare & Facials</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Bridal Packages</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="font-heading text-sm font-semibold tracking-wider uppercase text-forest-500/35">Organic Products</span><span class="w-1.5 h-1.5 rounded-full bg-gold-300"></span>
         </span>
     </div>
 </div>
 
 <!-- ===== SERVICES ===== -->
 <section id="services" class="py-28 md:py-36 relative">
-    <div class="motion-orb w-[600px] h-[600px] bg-sand-300/15 top-[10%] left-[-10%]" style="animation:floatOrb2 25s ease-in-out infinite"></div>
+    <div class="motion-orb w-[600px] h-[600px] bg-forest-500/10 top-[10%] left-[-10%]" style="animation:floatOrb2 25s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="text-center mb-20">
-            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5">
-                <span class="w-8 h-px bg-earth-400"></span> What We Offer <span class="w-8 h-px bg-earth-400"></span>
-            </span>
+            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> What We Offer <span class="w-8 h-px bg-forest-500"></span></span>
             <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Our <span class="accent-gradient">Services</span></h2>
         </div>
-
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt>
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-earth-400/20 transition-all duration-300">
-                        <iconify-icon icon="lucide:scissors" width="24" class="text-white"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Haircuts & Styling</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Precision cuts tailored to your face shape and lifestyle. From classic bobs to modern textured layers.</p>
-                    <span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-earth-400">From $65</span>
-                </div>
-            </div>
-            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.08s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-earth-400/20 transition-all duration-300">
-                        <iconify-icon icon="lucide:palette" width="24" class="text-white"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Color & Highlights</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Balayage, ombre, full color — our colorists create dimensional, natural-looking results every time.</p>
-                    <span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-earth-400">From $120</span>
-                </div>
-            </div>
-            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.16s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-earth-400/20 transition-all duration-300">
-                        <iconify-icon icon="lucide:sparkles" width="24" class="text-white"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Nail Care</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Manicures, pedicures, gel, and acrylics. Impeccable nail art in a hygienic, relaxing environment.</p>
-                    <span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-earth-400">From $35</span>
-                </div>
-            </div>
-            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt>
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-earth-400/20 transition-all duration-300">
-                        <iconify-icon icon="lucide:leaf" width="24" class="text-white"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Skincare & Facials</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Deep cleanse, hydrate, and glow. Custom treatments using 100% organic botanicals for radiant skin.</p>
-                    <span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-earth-400">From $80</span>
-                </div>
-            </div>
-            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.08s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-earth-400/20 transition-all duration-300">
-                        <iconify-icon icon="lucide:heart" width="24" class="text-white"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Bridal Packages</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Full-day beauty packages for your perfect day. Hair, makeup, nails, and skincare — all in one place.</p>
-                    <span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-earth-400">From $350</span>
-                </div>
-            </div>
-            <div class="reveal tilt-card rounded-3xl p-8 md:p-10 relative overflow-hidden group border border-earth-400/20" style="background:linear-gradient(135deg,rgba(248,244,238,.8),rgba(224,212,197,.5));backdrop-filter:blur(20px)" data-tilt style="transition-delay:.16s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner relative z-10">
-                    <div class="w-14 h-14 bg-earth-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <iconify-icon icon="lucide:gift" width="24" class="text-sand-200"></iconify-icon>
-                    </div>
-                    <h3 class="font-heading text-xl font-bold mb-2">Gift Cards</h3>
-                    <p class="text-sm text-earth-900/50 leading-relaxed mb-5">Give the gift of beauty. Available in any amount, redeemable across all services and products.</p>
-                    <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-earth-700 hover:text-earth-900 transition-colors">Purchase <iconify-icon icon="lucide:arrow-right" width="12"></iconify-icon></a>
-                </div>
-            </div>
+            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-forest-500/20 transition-all duration-300"><iconify-icon icon="lucide:scissors" width="24" class="text-white"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Haircuts & Styling</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Precision cuts tailored to your face shape and lifestyle. From classic bobs to modern textured layers.</p><span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-gold-500">From $65</span>
+            </div></div>
+            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.08s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-forest-500/20 transition-all duration-300"><iconify-icon icon="lucide:palette" width="24" class="text-white"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Color & Highlights</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Balayage, ombre, full color — our colorists create dimensional, natural-looking results every time.</p><span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-gold-500">From $120</span>
+            </div></div>
+            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.16s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-forest-500/20 transition-all duration-300"><iconify-icon icon="lucide:sparkles" width="24" class="text-white"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Nail Care</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Manicures, pedicures, gel, and acrylics. Impeccable nail art in a hygienic, relaxing environment.</p><span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-gold-500">From $35</span>
+            </div></div>
+            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-forest-500/20 transition-all duration-300"><iconify-icon icon="lucide:leaf" width="24" class="text-white"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Skincare & Facials</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Deep cleanse, hydrate, and glow. Custom treatments using 100% organic botanicals for radiant skin.</p><span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-gold-500">From $80</span>
+            </div></div>
+            <div class="reveal tilt-card glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group" data-tilt style="transition-delay:.08s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 accent-bg-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-forest-500/20 transition-all duration-300"><iconify-icon icon="lucide:heart" width="24" class="text-white"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Bridal Packages</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Full-day beauty packages for your perfect day. Hair, makeup, nails, and skincare — all in one place.</p><span class="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-gold-500">From $350</span>
+            </div></div>
+            <div class="reveal tilt-card rounded-3xl p-8 md:p-10 relative overflow-hidden group border border-gold-400/20" style="background:linear-gradient(135deg,rgba(247,244,237,.8),rgba(212,186,122,.12));backdrop-filter:blur(20px)" data-tilt><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner relative z-10">
+                <div class="w-14 h-14 bg-forest-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"><iconify-icon icon="lucide:gift" width="24" class="text-gold-300"></iconify-icon></div>
+                <h3 class="font-heading text-xl font-bold mb-2">Gift Cards</h3><p class="text-sm text-forest-900/50 leading-relaxed mb-5">Give the gift of beauty. Available in any amount, redeemable across all services and products.</p>
+                <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-forest-700 hover:text-forest-900 transition-colors">Purchase <iconify-icon icon="lucide:arrow-right" width="12"></iconify-icon></a>
+            </div></div>
         </div>
     </div>
 </section>
 
 <!-- ===== WHY CHOOSE US ===== -->
-<section id="about" class="py-28 md:py-36 bg-earth-900 text-sand-50 relative overflow-hidden">
-    <div class="motion-orb w-[600px] h-[600px] bg-earth-700/20 top-[-15%] right-[-10%]" style="animation:floatOrb1 20s ease-in-out infinite"></div>
-    <div class="motion-orb w-[400px] h-[400px] bg-earth-400/10 bottom-[-10%] left-[10%]" style="animation:floatOrb2 18s ease-in-out infinite"></div>
-    <div class="float-shape absolute top-[10%] right-[8%] hidden lg:block" data-speed="0.03"><div class="ring-3d" style="width:80px;height:80px;border-color:rgba(229,211,179,.08)"></div></div>
-    <div class="float-shape absolute bottom-[15%] left-[5%] hidden lg:block" data-speed="0.04"><div class="diamond-3d" style="width:24px;height:24px;border-color:rgba(229,211,179,.08);animation-duration:10s"></div></div>
-
+<section id="about" class="py-28 md:py-36 bg-forest-900 text-cream-50 relative overflow-hidden">
+    <div class="motion-orb w-[600px] h-[600px] bg-forest-600/20 top-[-15%] right-[-10%]" style="animation:floatOrb1 20s ease-in-out infinite"></div>
+    <div class="motion-orb w-[400px] h-[400px] bg-gold-400/8 bottom-[-10%] left-[10%]" style="animation:floatOrb2 18s ease-in-out infinite"></div>
+    <div class="float-shape absolute top-[10%] right-[8%] hidden lg:block" data-speed="0.03"><div class="ring-3d" style="width:80px;height:80px;border-color:rgba(201,169,110,.06)"></div></div>
+    <div class="float-shape absolute bottom-[15%] left-[5%] hidden lg:block" data-speed="0.04"><div class="diamond-3d" style="width:24px;height:24px;border-color:rgba(201,169,110,.06);animation-duration:10s"></div></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="text-center mb-20">
-            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-sand-400 mb-5">
-                <span class="w-8 h-px bg-sand-400"></span> Why Lumière <span class="w-8 h-px bg-sand-400"></span>
-            </span>
-            <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">Why Choose <span style="background:linear-gradient(135deg,#E5D3B3,#C5A47E);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Us</span></h2>
+            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-gold-300 mb-5"><span class="w-8 h-px bg-gold-300"></span> Why Lumière <span class="w-8 h-px bg-gold-300"></span></span>
+            <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">Why Choose <span class="accent-gradient">Us</span></h2>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md">
-                <div class="w-16 h-16 rounded-full bg-sand-300/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:clock" width="28" class="text-sand-300"></iconify-icon></div>
-                <div class="font-heading text-5xl font-bold text-white mb-1 counter-num" data-target="12">0</div>
-                <p class="text-sm text-white/40">Years in Business</p>
-            </div>
-            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.1s">
-                <div class="w-16 h-16 rounded-full bg-sand-300/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:users" width="28" class="text-sand-300"></iconify-icon></div>
-                <div class="font-heading text-5xl font-bold text-white mb-1 counter-num" data-target="15">0</div>
-                <p class="text-sm text-white/40">Certified Stylists</p>
-            </div>
-            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.2s">
-                <div class="w-16 h-16 rounded-full bg-sand-300/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:leaf" width="28" class="text-sand-300"></iconify-icon></div>
-                <div class="font-heading text-5xl font-bold text-white mb-1">100%</div>
-                <p class="text-sm text-white/40">Organic Products</p>
-            </div>
-            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.3s">
-                <div class="w-16 h-16 rounded-full bg-sand-300/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:trophy" width="28" class="text-sand-300"></iconify-icon></div>
-                <div class="font-heading text-5xl font-bold text-white mb-1">2024</div>
-                <p class="text-sm text-white/40">Best Salon — TimeOut NYC</p>
-            </div>
+            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md"><div class="w-16 h-16 rounded-full bg-gold-400/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:clock" width="28" class="text-gold-300"></iconify-icon></div><div class="font-heading text-5xl font-bold text-white mb-1 counter-num" data-target="12">0</div><p class="text-sm text-white/40">Years in Business</p></div>
+            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.1s"><div class="w-16 h-16 rounded-full bg-gold-400/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:users" width="28" class="text-gold-300"></iconify-icon></div><div class="font-heading text-5xl font-bold text-white mb-1 counter-num" data-target="15">0</div><p class="text-sm text-white/40">Certified Stylists</p></div>
+            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.2s"><div class="w-16 h-16 rounded-full bg-gold-400/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:leaf" width="28" class="text-gold-300"></iconify-icon></div><div class="font-heading text-5xl font-bold text-white mb-1">100%</div><p class="text-sm text-white/40">Organic Products</p></div>
+            <div class="reveal text-center p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:.3s"><div class="w-16 h-16 rounded-full bg-gold-400/10 flex items-center justify-center mx-auto mb-5"><iconify-icon icon="lucide:trophy" width="28" class="text-gold-300"></iconify-icon></div><div class="font-heading text-5xl font-bold text-white mb-1">2024</div><p class="text-sm text-white/40">Best Salon — TimeOut NYC</p></div>
         </div>
     </div>
 </section>
 
 <!-- ===== GALLERY ===== -->
 <section id="gallery" class="py-28 md:py-36 overflow-hidden relative">
-    <div class="motion-orb w-[500px] h-[500px] bg-sand-300/15 bottom-[5%] right-[-5%]" style="animation:floatOrb1 22s ease-in-out infinite"></div>
+    <div class="motion-orb w-[500px] h-[500px] bg-gold-400/10 bottom-[5%] right-[-5%]" style="animation:floatOrb1 22s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 mb-14 relative z-10">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-                <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5"><span class="w-8 h-px bg-earth-400"></span> Our Work</span>
-                <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">The <span class="accent-gradient">Gallery</span></h2>
-            </div>
-            <p class="reveal text-earth-900/40 max-w-sm text-sm leading-relaxed">Drag or scroll to explore — transformations, textures, and details that define Lumière.</p>
+            <div><span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> Our Work</span><h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">The <span class="accent-gradient">Gallery</span></h2></div>
+            <p class="reveal text-forest-900/40 max-w-sm text-sm leading-relaxed">Scroll to explore — once you've seen all images, you'll continue to the next section.</p>
         </div>
     </div>
     <div class="relative" id="galleryWrapper">
         <div class="hscroll-track" id="galleryScroll">
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/hair-blowout-style/600/800.jpg" alt="Blowout" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Styling</span><h3 class="font-heading text-white text-lg font-bold mt-1">Blowout Perfection</h3></div>
-                </div>
-            </div>
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/balayage-hair-color/600/800.jpg" alt="Balayage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Color</span><h3 class="font-heading text-white text-lg font-bold mt-1">Sunset Balayage</h3></div>
-                </div>
-            </div>
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/nail-art-manicure/600/800.jpg" alt="Nails" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Nails</span><h3 class="font-heading text-white text-lg font-bold mt-1">Artful Nail Design</h3></div>
-                </div>
-            </div>
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/bridal-hair-makeup/600/800.jpg" alt="Bridal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Bridal</span><h3 class="font-heading text-white text-lg font-bold mt-1">Bridal Elegance</h3></div>
-                </div>
-            </div>
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/facial-spa-glow/600/800.jpg" alt="Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Skincare</span><h3 class="font-heading text-white text-lg font-bold mt-1">Glow Treatment</h3></div>
-                </div>
-            </div>
-            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]">
-                <div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-sand-100" data-tilt>
-                    <img src="https://picsum.photos/seed/elegant-updo-hair/600/800.jpg" alt="Updo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="tilt-glare rounded-3xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-sand-300">Styling</span><h3 class="font-heading text-white text-lg font-bold mt-1">Elegant Updo</h3></div>
-                </div>
-            </div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&h=800&q=80" alt="Hair blowout styling" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Styling</span><h3 class="font-heading text-white text-lg font-bold mt-1">Blowout Perfection</h3></div>
+            </div></div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=600&h=800&q=80" alt="Balayage hair color" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Color</span><h3 class="font-heading text-white text-lg font-bold mt-1">Sunset Balayage</h3></div>
+            </div></div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&h=800&q=80" alt="Nail art manicure" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Nails</span><h3 class="font-heading text-white text-lg font-bold mt-1">Artful Nail Design</h3></div>
+            </div></div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&h=800&q=80" alt="Bridal hair and makeup" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Bridal</span><h3 class="font-heading text-white text-lg font-bold mt-1">Bridal Elegance</h3></div>
+            </div></div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&h=800&q=80" alt="Facial skincare treatment" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Skincare</span><h3 class="font-heading text-white text-lg font-bold mt-1">Glow Treatment</h3></div>
+            </div></div>
+            <div class="flex-shrink-0 w-[75vw] md:w-[45vw] lg:w-[30vw]"><div class="tilt-card group relative rounded-3xl overflow-hidden aspect-[3/4] bg-cream-100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1562322140-8baeacacf529?auto=format&fit=crop&w=600&h=800&q=80" alt="Elegant hair updo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="tilt-glare rounded-3xl"></div><div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6"><span class="text-[10px] font-bold tracking-[.2em] uppercase text-gold-300">Styling</span><h3 class="font-heading text-white text-lg font-bold mt-1">Elegant Updo</h3></div>
+            </div></div>
         </div>
     </div>
-    <div class="text-center mt-10 reveal">
-        <a href="#" class="interactive magnetic-btn inline-flex items-center gap-2.5 glass-card text-earth-900 text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-full hover:-translate-y-0.5 transition-all">
-            <iconify-icon icon="mdi:instagram" width="16"></iconify-icon> Follow us @lumieresalon
-        </a>
+    <!-- Progress bar -->
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div class="gallery-progress"><div class="gallery-progress-bar" id="galleryProgressBar"></div></div>
     </div>
+    <div class="text-center mt-8 reveal"><a href="#" class="interactive magnetic-btn inline-flex items-center gap-2.5 glass-card text-forest-900 text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-full hover:-translate-y-0.5 transition-all"><iconify-icon icon="mdi:instagram" width="16"></iconify-icon> Follow us @lumieresalon</a></div>
 </section>
 
-<!-- ===== MEET THE TEAM ===== -->
+<!-- ===== TEAM ===== -->
 <section class="py-28 md:py-36 bg-white relative overflow-hidden">
-    <div class="motion-orb w-[400px] h-[400px] bg-sand-300/15 top-[5%] left-[-5%]" style="animation:floatOrb2 20s ease-in-out infinite"></div>
+    <div class="motion-orb w-[400px] h-[400px] bg-forest-500/10 top-[5%] left-[-5%]" style="animation:floatOrb2 20s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="text-center mb-20">
-            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5"><span class="w-8 h-px bg-earth-400"></span> The Artists <span class="w-8 h-px bg-earth-400"></span></span>
+            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> The Artists <span class="w-8 h-px bg-forest-500"></span></span>
             <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Meet the <span class="accent-gradient">Team</span></h2>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-earth-900/5 bg-sand-50 group" data-tilt>
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner">
-                    <div class="aspect-[3/4] overflow-hidden"><img src="https://picsum.photos/seed/stylist-woman-salon/500/660.jpg" alt="Sophie" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                    <div class="p-6"><h3 class="font-heading text-lg font-bold">Sophie Laurent</h3><p class="text-xs font-medium tracking-wider uppercase text-earth-400 mt-1">Creative Director & Color Specialist</p><p class="text-sm text-earth-900/35 mt-2">14 years experience</p></div>
-                </div>
-            </div>
-            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-earth-900/5 bg-sand-50 group" data-tilt style="transition-delay:.1s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner">
-                    <div class="aspect-[3/4] overflow-hidden"><img src="https://picsum.photos/seed/barber-man-style/500/660.jpg" alt="Marcus" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                    <div class="p-6"><h3 class="font-heading text-lg font-bold">Marcus Reid</h3><p class="text-xs font-medium tracking-wider uppercase text-earth-400 mt-1">Men's Grooming & Texture Expert</p><p class="text-sm text-earth-900/35 mt-2">9 years experience</p></div>
-                </div>
-            </div>
-            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-earth-900/5 bg-sand-50 group" data-tilt style="transition-delay:.2s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner">
-                    <div class="aspect-[3/4] overflow-hidden"><img src="https://picsum.photos/seed/nail-tech-artist/500/660.jpg" alt="Aiko" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                    <div class="p-6"><h3 class="font-heading text-lg font-bold">Aiko Tanaka</h3><p class="text-xs font-medium tracking-wider uppercase text-earth-400 mt-1">Nail Artist & Brow Technician</p><p class="text-sm text-earth-900/35 mt-2">7 years experience</p></div>
-                </div>
-            </div>
-            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-earth-900/5 bg-sand-50 group" data-tilt style="transition-delay:.3s">
-                <div class="tilt-glare rounded-3xl"></div>
-                <div class="tilt-inner">
-                    <div class="aspect-[3/4] overflow-hidden"><img src="https://picsum.photos/seed/esthetician-spa/500/660.jpg" alt="Priya" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                    <div class="p-6"><h3 class="font-heading text-lg font-bold">Priya Nair</h3><p class="text-xs font-medium tracking-wider uppercase text-earth-400 mt-1">Skincare Specialist & Esthetician</p><p class="text-sm text-earth-900/35 mt-2">11 years experience</p></div>
-                </div>
-            </div>
+            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-forest-900/5 bg-cream-50 group" data-tilt><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner">
+                <div class="aspect-[3/4] overflow-hidden"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=500&h=660&q=80" alt="Sophie Laurent" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6"><h3 class="font-heading text-lg font-bold">Sophie Laurent</h3><p class="text-xs font-medium tracking-wider uppercase text-forest-500 mt-1">Creative Director & Color Specialist</p><p class="text-sm text-forest-900/35 mt-2">14 years experience</p></div>
+            </div></div>
+            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-forest-900/5 bg-cream-50 group" data-tilt style="transition-delay:.1s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner">
+                <div class="aspect-[3/4] overflow-hidden"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=660&q=80" alt="Marcus Reid" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6"><h3 class="font-heading text-lg font-bold">Marcus Reid</h3><p class="text-xs font-medium tracking-wider uppercase text-forest-500 mt-1">Men's Grooming & Texture Expert</p><p class="text-sm text-forest-900/35 mt-2">9 years experience</p></div>
+            </div></div>
+            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-forest-900/5 bg-cream-50 group" data-tilt style="transition-delay:.2s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner">
+                <div class="aspect-[3/4] overflow-hidden"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=660&q=80" alt="Aiko Tanaka" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6"><h3 class="font-heading text-lg font-bold">Aiko Tanaka</h3><p class="text-xs font-medium tracking-wider uppercase text-forest-500 mt-1">Nail Artist & Brow Technician</p><p class="text-sm text-forest-900/35 mt-2">7 years experience</p></div>
+            </div></div>
+            <div class="reveal tilt-card rounded-3xl overflow-hidden border border-forest-900/5 bg-cream-50 group" data-tilt style="transition-delay:.3s"><div class="tilt-glare rounded-3xl"></div><div class="tilt-inner">
+                <div class="aspect-[3/4] overflow-hidden"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&h=660&q=80" alt="Priya Nair" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6"><h3 class="font-heading text-lg font-bold">Priya Nair</h3><p class="text-xs font-medium tracking-wider uppercase text-forest-500 mt-1">Skincare Specialist & Esthetician</p><p class="text-sm text-forest-900/35 mt-2">11 years experience</p></div>
+            </div></div>
         </div>
     </div>
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
 <section class="py-28 md:py-36 relative overflow-hidden">
-    <div class="motion-orb w-[500px] h-[500px] bg-sand-300/15 top-[10%] right-[-8%]" style="animation:floatOrb1 24s ease-in-out infinite"></div>
+    <div class="motion-orb w-[500px] h-[500px] bg-forest-500/8 top-[10%] right-[-8%]" style="animation:floatOrb1 24s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="text-center mb-20">
-            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5"><span class="w-8 h-px bg-earth-400"></span> Client Love <span class="w-8 h-px bg-earth-400"></span></span>
+            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> Client Love <span class="w-8 h-px bg-forest-500"></span></span>
             <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">What They <span class="accent-gradient">Say</span></h2>
         </div>
         <div class="relative overflow-hidden" id="testimonialCarousel">
             <div class="flex transition-transform duration-500 ease-out" id="testimonialTrack">
                 <div class="w-full flex-shrink-0 px-4"><div class="max-w-3xl mx-auto text-center">
-                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon></div>
-                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-earth-800">"Sophie completely transformed my hair. I've never felt more confident. The whole experience was magic."</p>
-                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-sand-200 flex items-center justify-center text-xs font-bold text-earth-600">RM</div><div class="text-left"><p class="text-sm font-semibold">Rachel M.</p><p class="text-xs text-earth-900/35">New York</p></div></div>
+                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon></div>
+                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-forest-800">"Sophie completely transformed my hair. I've never felt more confident. The whole experience was magic."</p>
+                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-cream-200 flex items-center justify-center text-xs font-bold text-forest-600">RM</div><div class="text-left"><p class="text-sm font-semibold">Rachel M.</p><p class="text-xs text-forest-900/35">New York</p></div></div>
                 </div></div>
                 <div class="w-full flex-shrink-0 px-4"><div class="max-w-3xl mx-auto text-center">
-                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon></div>
-                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-earth-800">"Best balayage I've ever had. The atmosphere is so relaxing — I actually fell asleep during the process!"</p>
-                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-sand-200 flex items-center justify-center text-xs font-bold text-earth-600">CD</div><div class="text-left"><p class="text-sm font-semibold">Chloe D.</p><p class="text-xs text-earth-900/35">Brooklyn</p></div></div>
+                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon></div>
+                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-forest-800">"Best balayage I've ever had. The atmosphere is so relaxing — I actually fell asleep during the process!"</p>
+                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-cream-200 flex items-center justify-center text-xs font-bold text-forest-600">CD</div><div class="text-left"><p class="text-sm font-semibold">Chloe D.</p><p class="text-xs text-forest-900/35">Brooklyn</p></div></div>
                 </div></div>
                 <div class="w-full flex-shrink-0 px-4"><div class="max-w-3xl mx-auto text-center">
-                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-earth-400"></iconify-icon></div>
-                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-earth-800">"Priya's facial left my skin glowing for two weeks. Worth every penny. Already booked for next month."</p>
-                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-sand-200 flex items-center justify-center text-xs font-bold text-earth-600">JT</div><div class="text-left"><p class="text-sm font-semibold">James T.</p><p class="text-xs text-earth-900/35">Hoboken</p></div></div>
+                    <div class="flex justify-center gap-1 mb-8"><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon><iconify-icon icon="lucide:star" width="18" class="text-gold-400"></iconify-icon></div>
+                    <p class="font-heading text-2xl md:text-3xl font-medium leading-snug mb-8 text-forest-800">"Priya's facial left my skin glowing for two weeks. Worth every penny. Already booked for next month."</p>
+                    <div class="flex items-center justify-center gap-3"><div class="w-10 h-10 rounded-full bg-cream-200 flex items-center justify-center text-xs font-bold text-forest-600">JT</div><div class="text-left"><p class="text-sm font-semibold">James T.</p><p class="text-xs text-forest-900/35">Hoboken</p></div></div>
                 </div></div>
             </div>
             <div class="flex items-center justify-center gap-4 mt-12">
-                <button id="prevBtn" class="interactive w-12 h-12 rounded-full border border-earth-900/10 flex items-center justify-center hover:bg-sand-100 transition-colors"><iconify-icon icon="lucide:arrow-left" width="18"></iconify-icon></button>
-                <div class="flex gap-2" id="carouselDots"><div class="w-8 h-1 rounded-full accent-bg-light transition-all duration-300"></div><div class="w-8 h-1 rounded-full bg-earth-900/10 transition-all duration-300"></div><div class="w-8 h-1 rounded-full bg-earth-900/10 transition-all duration-300"></div></div>
-                <button id="nextBtn" class="interactive w-12 h-12 rounded-full border border-earth-900/10 flex items-center justify-center hover:bg-sand-100 transition-colors"><iconify-icon icon="lucide:arrow-right" width="18"></iconify-icon></button>
+                <button id="prevBtn" class="interactive w-12 h-12 rounded-full border border-forest-900/10 flex items-center justify-center hover:bg-cream-100 transition-colors"><iconify-icon icon="lucide:arrow-left" width="18"></iconify-icon></button>
+                <div class="flex gap-2" id="carouselDots"><div class="w-8 h-1 rounded-full accent-bg-light transition-all duration-300"></div><div class="w-8 h-1 rounded-full bg-forest-900/10 transition-all duration-300"></div><div class="w-8 h-1 rounded-full bg-forest-900/10 transition-all duration-300"></div></div>
+                <button id="nextBtn" class="interactive w-12 h-12 rounded-full border border-forest-900/10 flex items-center justify-center hover:bg-cream-100 transition-colors"><iconify-icon icon="lucide:arrow-right" width="18"></iconify-icon></button>
             </div>
         </div>
     </div>
@@ -517,34 +380,31 @@
 
 <!-- ===== PRICING ===== -->
 <section id="pricing" class="py-28 md:py-36 bg-white relative overflow-hidden">
-    <div class="motion-orb w-[500px] h-[500px] bg-sand-300/10 bottom-[-10%] left-[-5%]" style="animation:floatOrb2 22s ease-in-out infinite"></div>
+    <div class="motion-orb w-[500px] h-[500px] bg-gold-400/8 bottom-[-10%] left-[-5%]" style="animation:floatOrb2 22s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <div>
-                <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5"><span class="w-8 h-px bg-earth-400"></span> Transparent Pricing</span>
+                <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> Transparent Pricing</span>
                 <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6">Our <span class="accent-gradient">Prices</span></h2>
-                <p class="reveal text-earth-900/45 leading-relaxed mb-4">We believe in transparent, fair pricing. Every service begins with a complimentary consultation.</p>
-                <p class="reveal text-sm text-earth-900/30 leading-relaxed mb-8">Final price confirmed at consultation. Prices may vary based on hair length, thickness, and complexity.</p>
+                <p class="reveal text-forest-900/45 leading-relaxed mb-4">We believe in transparent, fair pricing. Every service begins with a complimentary consultation.</p>
+                <p class="reveal text-sm text-forest-900/30 leading-relaxed mb-8">Final price confirmed at consultation. Prices may vary based on hair length, thickness, and complexity.</p>
                 <div class="reveal flex flex-col sm:flex-row gap-4">
                     <a href="#booking" class="interactive magnetic-btn accent-bg-light text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 rounded-full inline-flex items-center gap-2 hover:opacity-90 transition-opacity">Book Now <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon></a>
-                    <a href="tel:2125550192" class="interactive magnetic-btn glass-card text-earth-900 text-xs font-semibold tracking-widest uppercase px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-white/80 transition-colors"><iconify-icon icon="lucide:phone" width="14"></iconify-icon> Call Us</a>
+                    <a href="tel:2125550192" class="interactive magnetic-btn glass-card text-forest-900 text-xs font-semibold tracking-widest uppercase px-8 py-4 rounded-full inline-flex items-center gap-2 hover:bg-white/80 transition-colors"><iconify-icon icon="lucide:phone" width="14"></iconify-icon> Call Us</a>
                 </div>
             </div>
             <div class="reveal-3d-r">
                 <div class="glass-card rounded-3xl overflow-hidden">
-                    <div class="grid grid-cols-[1fr_auto] px-8 py-4 border-b border-earth-900/5 bg-white/30">
-                        <span class="text-[10px] font-bold tracking-[.15em] uppercase text-earth-900/30">Service</span>
-                        <span class="text-[10px] font-bold tracking-[.15em] uppercase text-earth-900/30">Starting At</span>
-                    </div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Women's Haircut</span><span class="text-sm font-semibold text-earth-700">$65</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Men's Haircut</span><span class="text-sm font-semibold text-earth-700">$45</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Full Color</span><span class="text-sm font-semibold text-earth-700">$120</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Balayage</span><span class="text-sm font-semibold text-earth-700">$180</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Manicure</span><span class="text-sm font-semibold text-earth-700">$35</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-earth-900/5"><span class="text-sm font-medium">Classic Facial</span><span class="text-sm font-semibold text-earth-700">$80</span></div>
-                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5"><span class="text-sm font-medium">Bridal Package</span><span class="text-sm font-semibold text-earth-700">$350</span></div>
+                    <div class="grid grid-cols-[1fr_auto] px-8 py-4 border-b border-forest-900/5 bg-white/30"><span class="text-[10px] font-bold tracking-[.15em] uppercase text-forest-900/30">Service</span><span class="text-[10px] font-bold tracking-[.15em] uppercase text-forest-900/30">Starting At</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Women's Haircut</span><span class="text-sm font-semibold text-forest-700">$65</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Men's Haircut</span><span class="text-sm font-semibold text-forest-700">$45</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Full Color</span><span class="text-sm font-semibold text-forest-700">$120</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Balayage</span><span class="text-sm font-semibold text-forest-700">$180</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Manicure</span><span class="text-sm font-semibold text-forest-700">$35</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5 border-b border-forest-900/5"><span class="text-sm font-medium">Classic Facial</span><span class="text-sm font-semibold text-forest-700">$80</span></div>
+                    <div class="pricing-row grid grid-cols-[1fr_auto] px-8 py-5"><span class="text-sm font-medium">Bridal Package</span><span class="text-sm font-semibold text-forest-700">$350</span></div>
                 </div>
-                <p class="text-center mt-4 text-xs text-earth-900/25">* Final price confirmed at consultation.</p>
+                <p class="text-center mt-4 text-xs text-forest-900/25">* Final price confirmed at consultation.</p>
             </div>
         </div>
     </div>
@@ -552,20 +412,15 @@
 
 <!-- ===== BOOKING CTA ===== -->
 <section id="booking" class="py-28 md:py-36 relative overflow-hidden">
-    <img src="https://picsum.photos/seed/salon-mirror-reflection/1920/800.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" style="filter:grayscale(25%) sepia(20%)">
-    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(44,30,20,.92),rgba(74,53,38,.9))"></div>
-    <div class="motion-orb w-[500px] h-[500px] bg-earth-400/10 top-[-10%] right-[-5%]" style="animation:floatOrb1 18s ease-in-out infinite"></div>
-    <div class="float-shape absolute top-[10%] right-[10%] hidden lg:block" data-speed="0.03"><div class="ring-3d" style="width:70px;height:70px;border-color:rgba(229,211,179,.06)"></div></div>
-    <div class="float-shape absolute bottom-[15%] left-[8%] hidden lg:block" data-speed="0.04"><div class="diamond-3d" style="width:30px;height:30px;border-color:rgba(229,211,179,.06);animation-duration:11s"></div></div>
-
+    <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1920&h=800&q=80" alt="Salon mirror" class="absolute inset-0 w-full h-full object-cover" style="filter:grayscale(25%) sepia(15%)">
+    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(9,30,24,.93),rgba(22,61,48,.9))"></div>
+    <div class="motion-orb w-[500px] h-[500px] bg-gold-400/8 top-[-10%] right-[-5%]" style="animation:floatOrb1 18s ease-in-out infinite"></div>
+    <div class="float-shape absolute top-[10%] right-[10%] hidden lg:block" data-speed="0.03"><div class="ring-3d" style="width:70px;height:70px;border-color:rgba(201,169,110,.06)"></div></div>
+    <div class="float-shape absolute bottom-[15%] left-[8%] hidden lg:block" data-speed="0.04"><div class="diamond-3d" style="width:30px;height:30px;border-color:rgba(201,169,110,.06);animation-duration:11s"></div></div>
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <h2 class="reveal font-heading text-4xl md:text-6xl font-bold tracking-tight text-white leading-[.95] mb-6">Ready for a Fresh Start?</h2>
         <p class="reveal text-white/50 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10">Online booking available 24/7. No waiting, no hassle. Your transformation is just one click away.</p>
-        <div class="reveal">
-            <button id="bookBtn" class="interactive magnetic-btn inline-flex items-center gap-3 bg-white text-earth-900 text-sm font-bold px-10 py-5 rounded-full hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-200">
-                Book My Appointment <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
-            </button>
-        </div>
+        <div class="reveal"><button id="bookBtn" class="interactive magnetic-btn inline-flex items-center gap-3 bg-white text-forest-900 text-sm font-bold px-10 py-5 rounded-full hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-200">Book My Appointment <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon></button></div>
         <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/35">
             <a href="tel:2125550192" class="interactive flex items-center gap-2 text-sm hover:text-white/70 transition-colors"><iconify-icon icon="lucide:phone" width="14"></iconify-icon> (212) 555-0192</a>
             <span class="hidden sm:block w-1 h-1 rounded-full bg-white/15"></span>
@@ -576,31 +431,30 @@
 
 <!-- ===== CONTACT ===== -->
 <section id="contact" class="py-28 md:py-36 relative">
-    <div class="motion-orb w-[400px] h-[400px] bg-sand-300/10 top-[5%] right-[-5%]" style="animation:floatOrb1 20s ease-in-out infinite"></div>
+    <div class="motion-orb w-[400px] h-[400px] bg-forest-500/8 top-[5%] right-[-5%]" style="animation:floatOrb1 20s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="text-center mb-20">
-            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-earth-400 mb-5"><span class="w-8 h-px bg-earth-400"></span> Find Us <span class="w-8 h-px bg-earth-400"></span></span>
+            <span class="reveal inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] uppercase text-forest-500 mb-5"><span class="w-8 h-px bg-forest-500"></span> Find Us <span class="w-8 h-px bg-forest-500"></span></span>
             <h2 class="reveal font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Visit the <span class="accent-gradient">Salon</span></h2>
         </div>
         <div class="grid lg:grid-cols-2 gap-8">
-            <div class="reveal-3d rounded-3xl overflow-hidden border border-earth-900/5 h-[400px] lg:h-full min-h-[400px]">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.0!2d-73.978!3d40.764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzUwLjQiTiA3M8KwNTgnNDAuOCJX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;filter:sepia(10%) saturate(90%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="reveal-3d rounded-3xl overflow-hidden border border-forest-900/5 h-[400px] lg:h-full min-h-[400px]">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.0!2d-73.978!3d40.764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ1JzUwLjQiTiA3M8KwNTgnNDAuOCJX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;filter:sepia(8%) saturate(90%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="reveal-3d-r flex flex-col gap-6">
                 <div class="glass-card rounded-3xl p-8">
                     <h3 class="font-heading text-2xl font-bold mb-6">Get in Touch</h3>
                     <div class="space-y-5">
-                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-sand-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:map-pin" width="18" class="text-earth-400"></iconify-icon></div><div><p class="text-xs text-earth-900/35">Address</p><p class="text-sm font-medium">142 W 57th Street, Suite 4, New York, NY 10019</p></div></div>
-                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-sand-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:mail" width="18" class="text-earth-400"></iconify-icon></div><div><p class="text-xs text-earth-900/35">Email</p><a href="mailto:hello@lumieresalon.com" class="interactive text-sm font-medium text-earth-400 hover:text-earth-900 transition-colors">hello@lumieresalon.com</a></div></div>
-                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-sand-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:phone" width="18" class="text-earth-400"></iconify-icon></div><div><p class="text-xs text-earth-900/35">Phone</p><a href="tel:2125550192" class="interactive text-sm font-medium text-earth-400 hover:text-earth-900 transition-colors">(212) 555-0192</a></div></div>
-                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-sand-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:clock" width="18" class="text-earth-400"></iconify-icon></div><div><p class="text-xs text-earth-900/35">Hours</p><p class="text-sm font-medium">Mon–Sat: 9am–8pm · Sun: 10am–6pm</p></div></div>
+                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-cream-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:map-pin" width="18" class="text-forest-500"></iconify-icon></div><div><p class="text-xs text-forest-900/35">Address</p><p class="text-sm font-medium">142 W 57th Street, Suite 4, New York, NY 10019</p></div></div>
+                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-cream-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:mail" width="18" class="text-forest-500"></iconify-icon></div><div><p class="text-xs text-forest-900/35">Email</p><a href="mailto:hello@lumieresalon.com" class="interactive text-sm font-medium text-forest-500 hover:text-forest-900 transition-colors">hello@lumieresalon.com</a></div></div>
+                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-cream-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:phone" width="18" class="text-forest-500"></iconify-icon></div><div><p class="text-xs text-forest-900/35">Phone</p><a href="tel:2125550192" class="interactive text-sm font-medium text-forest-500 hover:text-forest-900 transition-colors">(212) 555-0192</a></div></div>
+                        <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-cream-100 flex items-center justify-center flex-shrink-0"><iconify-icon icon="lucide:clock" width="18" class="text-forest-500"></iconify-icon></div><div><p class="text-xs text-forest-900/35">Hours</p><p class="text-sm font-medium">Mon–Sat: 9am–8pm · Sun: 10am–6pm</p></div></div>
                     </div>
-                    <div class="mt-6 pt-5 border-t border-earth-900/5">
-                        <p class="text-xs font-medium tracking-wider uppercase text-earth-900/20 mb-3">Follow Us</p>
+                    <div class="mt-6 pt-5 border-t border-forest-900/5"><p class="text-xs font-medium tracking-wider uppercase text-forest-900/20 mb-3">Follow Us</p>
                         <div class="flex gap-2.5">
-                            <a href="#" class="interactive w-9 h-9 rounded-full bg-sand-100 flex items-center justify-center hover:bg-sand-200 transition-colors"><iconify-icon icon="mdi:instagram" width="16" class="text-earth-400"></iconify-icon></a>
-                            <a href="#" class="interactive w-9 h-9 rounded-full bg-sand-100 flex items-center justify-center hover:bg-sand-200 transition-colors"><iconify-icon icon="mdi:facebook" width="16" class="text-earth-400"></iconify-icon></a>
-                            <a href="#" class="interactive w-9 h-9 rounded-full bg-sand-100 flex items-center justify-center hover:bg-sand-200 transition-colors"><iconify-icon icon="ic:baseline-tiktok" width="16" class="text-earth-400"></iconify-icon></a>
+                            <a href="#" class="interactive w-9 h-9 rounded-full bg-cream-100 flex items-center justify-center hover:bg-cream-200 transition-colors"><iconify-icon icon="mdi:instagram" width="16" class="text-forest-500"></iconify-icon></a>
+                            <a href="#" class="interactive w-9 h-9 rounded-full bg-cream-100 flex items-center justify-center hover:bg-cream-200 transition-colors"><iconify-icon icon="mdi:facebook" width="16" class="text-forest-500"></iconify-icon></a>
+                            <a href="#" class="interactive w-9 h-9 rounded-full bg-cream-100 flex items-center justify-center hover:bg-cream-200 transition-colors"><iconify-icon icon="ic:baseline-tiktok" width="16" class="text-forest-500"></iconify-icon></a>
                         </div>
                     </div>
                 </div>
@@ -619,123 +473,152 @@
 </section>
 
 <!-- ===== FOOTER ===== -->
-<footer class="bg-earth-900 text-sand-50 py-16 relative overflow-hidden">
-    <div class="motion-orb w-[500px] h-[500px] bg-earth-700/15 top-[-20%] left-[20%]" style="animation:floatOrb2 25s ease-in-out infinite"></div>
+<footer class="bg-forest-900 text-cream-50 py-16 relative overflow-hidden">
+    <div class="motion-orb w-[500px] h-[500px] bg-forest-700/15 top-[-20%] left-[20%]" style="animation:floatOrb2 25s ease-in-out infinite"></div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div class="grid md:grid-cols-3 gap-12 md:gap-8 mb-12">
-            <div>
-                <div class="flex items-center gap-2.5 mb-4"><iconify-icon icon="game-icons:comb" width="22" class="text-sand-300"></iconify-icon><span class="font-heading font-bold text-lg text-white">Lumière Salon</span></div>
-                <p class="text-sm text-white/30 leading-relaxed italic">Where beauty finds its light.</p>
-            </div>
-            <div>
-                <p class="text-[10px] font-bold tracking-[.2em] uppercase text-white/20 mb-4">Quick Links</p>
-                <div class="grid grid-cols-2 gap-x-8 gap-y-2">
-                    <a href="#services" class="interactive text-sm text-white/40 hover:text-white transition-colors">Services</a>
-                    <a href="#" class="interactive text-sm text-white/40 hover:text-white transition-colors">Careers</a>
-                    <a href="#about" class="interactive text-sm text-white/40 hover:text-white transition-colors">About</a>
-                    <a href="#" class="interactive text-sm text-white/40 hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#gallery" class="interactive text-sm text-white/40 hover:text-white transition-colors">Gallery</a>
-                    <a href="#pricing" class="interactive text-sm text-white/40 hover:text-white transition-colors">Pricing</a>
-                </div>
-            </div>
-            <div>
-                <p class="text-[10px] font-bold tracking-[.2em] uppercase text-white/20 mb-4">Connect</p>
-                <div class="flex gap-3">
-                    <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="mdi:instagram" width="18" class="text-white/40"></iconify-icon></a>
-                    <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="mdi:facebook" width="18" class="text-white/40"></iconify-icon></a>
-                    <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="ic:baseline-tiktok" width="18" class="text-white/40"></iconify-icon></a>
-                </div>
-            </div>
+            <div><div class="flex items-center gap-2.5 mb-4"><iconify-icon icon="game-icons:comb" width="22" class="text-gold-300"></iconify-icon><span class="font-heading font-bold text-lg text-white">Lumière Salon</span></div><p class="text-sm text-white/30 leading-relaxed italic">Where beauty finds its light.</p></div>
+            <div><p class="text-[10px] font-bold tracking-[.2em] uppercase text-white/20 mb-4">Quick Links</p><div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                <a href="#services" class="interactive text-sm text-white/40 hover:text-white transition-colors">Services</a><a href="#" class="interactive text-sm text-white/40 hover:text-white transition-colors">Careers</a>
+                <a href="#about" class="interactive text-sm text-white/40 hover:text-white transition-colors">About</a><a href="#" class="interactive text-sm text-white/40 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#gallery" class="interactive text-sm text-white/40 hover:text-white transition-colors">Gallery</a><a href="#pricing" class="interactive text-sm text-white/40 hover:text-white transition-colors">Pricing</a>
+            </div></div>
+            <div><p class="text-[10px] font-bold tracking-[.2em] uppercase text-white/20 mb-4">Connect</p><div class="flex gap-3">
+                <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="mdi:instagram" width="18" class="text-white/40"></iconify-icon></a>
+                <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="mdi:facebook" width="18" class="text-white/40"></iconify-icon></a>
+                <a href="#" class="interactive w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"><iconify-icon icon="ic:baseline-tiktok" width="18" class="text-white/40"></iconify-icon></a>
+            </div></div>
         </div>
         <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-xs text-white/20">© 2026 Lumière Salon. All rights reserved.</p>
-            <p class="text-xs text-white/20">Designed with <iconify-icon icon="lucide:heart" width="10" class="text-earth-400 inline-block"></iconify-icon> in New York City</p>
+            <p class="text-xs text-white/20">Designed with <iconify-icon icon="lucide:heart" width="10" class="text-gold-400 inline-block"></iconify-icon> in New York City</p>
         </div>
     </div>
 </footer>
 
-<!-- TOAST -->
-<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] bg-earth-900 text-sand-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 opacity-0 translate-y-4 pointer-events-none transition-all duration-400" style="backdrop-filter:blur(20px)">
-    <iconify-icon icon="lucide:check-circle" width="18" class="text-green-400"></iconify-icon>
-    <span class="text-sm font-medium" id="toastMsg">Message sent!</span>
-</div>
-
-<!-- BACK TO TOP -->
-<button id="backToTop" class="interactive fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full accent-bg-light text-sand-50 shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:opacity-90 hover:-translate-y-1" aria-label="Back to top">
-    <iconify-icon icon="lucide:arrow-up" width="18"></iconify-icon>
-</button>
+<!-- TOAST & BACK TO TOP -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] bg-forest-900 text-cream-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 opacity-0 translate-y-4 pointer-events-none transition-all duration-400" style="backdrop-filter:blur(20px)"><iconify-icon icon="lucide:check-circle" width="18" class="text-green-400"></iconify-icon><span class="text-sm font-medium" id="toastMsg">Message sent!</span></div>
+<button id="backToTop" class="interactive fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full accent-bg-light text-cream-50 shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:opacity-90 hover:-translate-y-1" aria-label="Back to top"><iconify-icon icon="lucide:arrow-up" width="18"></iconify-icon></button>
 
 <script>
 // ===== PRELOADER =====
 window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('preloader').classList.add('hidden')},1200)});
 
-// ===== CUSTOM CURSOR =====
-const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
+// ===== CURSOR =====
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx-4}px,${my-4}px)`});
-(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx-22}px,${ry-22}px)`;requestAnimationFrame(animRing)})();
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx-22}px,${ry-22}px)`;requestAnimationFrame(a)})();
 document.querySelectorAll('.interactive,a,button,select,input,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hovering'));el.addEventListener('mouseleave',()=>ring.classList.remove('hovering'))});
 
-// ===== MAGNETIC BUTTONS =====
+// ===== MAGNETIC =====
 document.querySelectorAll('.magnetic-btn').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform=`translate(${x*.2}px,${y*.2}px)`});b.addEventListener('mouseleave',()=>{b.style.transform='translate(0,0)'})});
 
-// ===== 3D TILT CARDS =====
-document.querySelectorAll('[data-tilt]').forEach(card=>{card.style.transformStyle='preserve-3d';card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,rx=(.5-y)*14,ry=(x-.5)*14;card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.015,1.015,1.015)`;card.style.boxShadow=`${-ry}px ${rx}px 40px rgba(197,164,126,.06)`;const gl=card.querySelector('.tilt-glare');if(gl){gl.style.setProperty('--glare-x',x*100+'%');gl.style.setProperty('--glare-y',y*100+'%')}});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';card.style.boxShadow='none'})});
+// ===== TILT =====
+document.querySelectorAll('[data-tilt]').forEach(c=>{c.style.transformStyle='preserve-3d';c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,rx=(.5-y)*14,ry=(x-.5)*14;c.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.015,1.015,1.015)`;c.style.boxShadow=`${-ry}px ${rx}px 40px rgba(45,107,86,.06)`;const gl=c.querySelector('.tilt-glare');if(gl){gl.style.setProperty('--glare-x',x*100+'%');gl.style.setProperty('--glare-y',y*100+'%')}});c.addEventListener('mouseleave',()=>{c.style.transform='perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';c.style.boxShadow='none'})});
 
-// ===== PARALLAX SHAPES =====
-document.addEventListener('mousemove',e=>{const shapes=document.querySelectorAll('.float-shape'),cx=innerWidth/2,cy=innerHeight/2,dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;shapes.forEach(s=>{const sp=parseFloat(s.dataset.speed)||.03;s.style.transform=`translate(${dx*sp*180}px,${dy*sp*180}px)`})});
+// ===== PARALLAX =====
+document.addEventListener('mousemove',e=>{const s=document.querySelectorAll('.float-shape'),cx=innerWidth/2,cy=innerHeight/2,dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;s.forEach(el=>{const sp=parseFloat(el.dataset.speed)||.03;el.style.transform=`translate(${dx*sp*180}px,${dy*sp*180}px)`})});
 
-// ===== PARTICLE CANVAS (GOLDEN DUST) =====
-const canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d');
-let particles=[];const particleCount=80;
+// ===== PARTICLES =====
+const canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d');let particles=[];const pCount=90;
 function resizeCanvas(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight}
 resizeCanvas();window.addEventListener('resize',resizeCanvas);
-class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height+canvas.height*.5;this.size=Math.random()*2.5+.5;this.speedY=Math.random()*.4+.1;this.speedX=(Math.random()-.5)*.2;this.opacity=Math.random()*.5+.1;this.life=0;this.maxLife=Math.random()*400+200}update(){this.y-=this.speedY;this.x+=this.speedX;this.life++;const lifeRatio=this.life/this.maxLife;this.currentOpacity=this.opacity*(1-lifeRatio);if(this.life>=this.maxLife||this.y<-10)this.reset()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=`rgba(197,164,126,${this.currentOpacity})`;ctx.fill();ctx.beginPath();ctx.arc(this.x,this.y,this.size*2,0,Math.PI*2);ctx.fillStyle=`rgba(197,164,126,${this.currentOpacity*.15})`;ctx.fill()}}
-for(let i=0;i<particleCount;i++)particles.push(new Particle());
-function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animateParticles)}
-animateParticles();
+class P{constructor(){this.reset()}reset(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height+canvas.height*.3;this.size=Math.random()*2.5+.5;this.speedY=Math.random()*.35+.08;this.speedX=(Math.random()-.5)*.15;this.opacity=Math.random()*.45+.08;this.life=0;this.maxLife=Math.random()*450+200;this.isGold=Math.random()>.6}update(){this.y-=this.speedY;this.x+=this.speedX+Math.sin(this.life*.01)*.15;this.life++;const r=this.life/this.maxLife;this.curOp=this.opacity*(1-r);if(this.life>=this.maxLife||this.y<-10)this.reset()}draw(){const c=this.isGold?'201,169,110':'45,107,86';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=`rgba(${c},${this.curOp})`;ctx.fill();ctx.beginPath();ctx.arc(this.x,this.y,this.size*2.5,0,Math.PI*2);ctx.fillStyle=`rgba(${c},${this.curOp*.12})`;ctx.fill()}}
+for(let i=0;i<pCount;i++)particles.push(new P());
+function aP(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(aP)}aP();
 
 // ===== SCROLL REVEAL =====
-const rObs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');rObs.unobserve(en.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal,.reveal-3d,.reveal-3d-r').forEach(el=>rObs.observe(el));
+const rO=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rO.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-3d,.reveal-3d-r').forEach(el=>rO.observe(el));
 
-// ===== ANIMATED COUNTERS =====
-const cObs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){const el=en.target,tgt=parseInt(el.dataset.target);let cur=0;const inc=tgt/55;const tm=setInterval(()=>{cur+=inc;if(cur>=tgt){cur=tgt;clearInterval(tm)}el.textContent=Math.floor(cur)},18);cObs.unobserve(el)}})},{threshold:.5});
-document.querySelectorAll('.counter-num').forEach(el=>cObs.observe(el));
+// ===== COUNTERS =====
+const cO=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){const el=e.target,tgt=parseInt(el.dataset.target);let cur=0;const inc=tgt/55;const tm=setInterval(()=>{cur+=inc;if(cur>=tgt){cur=tgt;clearInterval(tm)}el.textContent=Math.floor(cur)},18);cO.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('.counter-num').forEach(el=>cO.observe(el));
 
-// ===== GALLERY HORIZONTAL SCROLL =====
-const gWrap=document.getElementById('galleryWrapper'),gScroll=document.getElementById('galleryScroll');
-let gDrag=false,gStartX=0,gScrollInit=0;
-if(innerWidth>768){gWrap.addEventListener('wheel',e=>{e.preventDefault();const cur=new DOMMatrix(getComputedStyle(gScroll).transform);gScroll.style.transform=`translateX(${cur.m41-e.deltaY}px)`},{passive:false})}
-gScroll.addEventListener('mousedown',e=>{gDrag=true;gStartX=e.pageX;gScrollInit=new DOMMatrix(getComputedStyle(gScroll).transform).m41;gScroll.style.cursor='grabbing'});
-document.addEventListener('mouseup',()=>{gDrag=false;gScroll.style.cursor='grab'});
-document.addEventListener('mousemove',e=>{if(!gDrag)return;e.preventDefault();gScroll.style.transform=`translateX(${gScrollInit+(e.pageX-gStartX)*1.2}px)`});
-let tStartX=0,tScrollInit=0;
-gScroll.addEventListener('touchstart',e=>{tStartX=e.touches[0].pageX;tScrollInit=new DOMMatrix(getComputedStyle(gScroll).transform).m41});
-gScroll.addEventListener('touchmove',e=>{gScroll.style.transform=`translateX(${tScrollInit+(e.touches[0].pageX-tStartX)*1.2}px)`});
+// ===== GALLERY HORIZONTAL SCROLL WITH BOUNDARY RELEASE =====
+const gW=document.getElementById('galleryWrapper'),gS=document.getElementById('galleryScroll'),gPB=document.getElementById('galleryProgressBar');
+let gDrag=false,gX=0,gI=0,gCurrentX=0;
 
-// ===== TESTIMONIAL CAROUSEL =====
-const tTrack=document.getElementById('testimonialTrack'),tDots=document.querySelectorAll('#carouselDots > div');
-let tCur=0;const tTotal=3;
-function goSlide(i){tCur=i;tTrack.style.transform=`translateX(-${tCur*100}%)`;tDots.forEach((d,j)=>{d.className=j===tCur?'w-8 h-1 rounded-full accent-bg-light transition-all duration-300':'w-8 h-1 rounded-full bg-earth-900/10 transition-all duration-300'})}
-document.getElementById('nextBtn').addEventListener('click',()=>goSlide((tCur+1)%tTotal));
-document.getElementById('prevBtn').addEventListener('click',()=>goSlide((tCur-1+tTotal)%tTotal));
-setInterval(()=>goSlide((tCur+1)%tTotal),5500);
+function getScrollBounds(){
+    const trackWidth=gS.scrollWidth;
+    const containerWidth=gW.offsetWidth;
+    return{min:-(trackWidth-containerWidth),max:0};
+}
+
+function clampGallery(x){
+    const b=getScrollBounds();
+    return Math.max(b.min,Math.min(b.max,x));
+}
+
+function updateGalleryProgress(){
+    const b=getScrollBounds();
+    const range=b.max-b.min;
+    if(range===0){gPB.style.width='100%';return}
+    const progress=Math.abs(gCurrentX)/Math.abs(b.min);
+    gPB.style.width=Math.min(100,Math.max(0,progress*100))+'%';
+}
+
+function setGalleryX(x){
+    gCurrentX=clampGallery(x);
+    gS.style.transform=`translateX(${gCurrentX}px)`;
+    updateGalleryProgress();
+}
+
+// Wheel: horizontal scroll with boundary release for vertical scroll
+if(innerWidth>768){
+    gW.addEventListener('wheel',e=>{
+        const b=getScrollBounds();
+        const scrollingDown=e.deltaY>0;
+        const scrollingUp=e.deltaY<0;
+
+        // At right boundary (start) scrolling up → allow page scroll
+        if(scrollingUp && gCurrentX>=b.max){
+            return; // let default vertical scroll happen
+        }
+        // At left boundary (end) scrolling down → allow page scroll
+        if(scrollingDown && gCurrentX<=b.min){
+            return; // let default vertical scroll happen
+        }
+
+        // Otherwise, capture for horizontal scroll
+        e.preventDefault();
+        const newX=gCurrentX-e.deltaY;
+        setGalleryX(newX);
+    },{passive:false});
+}
+
+// Drag
+gS.addEventListener('mousedown',e=>{gDrag=true;gX=e.pageX;gI=gCurrentX;gS.style.cursor='grabbing'});
+document.addEventListener('mouseup',()=>{if(gDrag){gDrag=false;gS.style.cursor='grab'}});
+document.addEventListener('mousemove',e=>{if(!gDrag)return;e.preventDefault();const newX=gI+(e.pageX-gX)*1.2;setGalleryX(newX)});
+
+// Touch
+let tX=0,tI=0;
+gS.addEventListener('touchstart',e=>{tX=e.touches[0].pageX;tI=gCurrentX});
+gS.addEventListener('touchmove',e=>{const newX=tI+(e.touches[0].pageX-tX)*1.2;setGalleryX(newX)});
+
+// Init progress
+updateGalleryProgress();
+
+// ===== CAROUSEL =====
+const tT=document.getElementById('testimonialTrack'),tD=document.querySelectorAll('#carouselDots > div');let tC=0;const tTt=3;
+function gS2(i){tC=i;tT.style.transform=`translateX(-${tC*100}%)`;tD.forEach((d,j)=>{d.className=j===tC?'w-8 h-1 rounded-full accent-bg-light transition-all duration-300':'w-8 h-1 rounded-full bg-forest-900/10 transition-all duration-300'})}
+document.getElementById('nextBtn').addEventListener('click',()=>gS2((tC+1)%tTt));
+document.getElementById('prevBtn').addEventListener('click',()=>gS2((tC-1+tTt)%tTt));
+setInterval(()=>gS2((tC+1)%tTt),5500);
 
 // ===== TOAST =====
-function showToast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.style.opacity='1';t.style.transform='translate(-50%,0)';t.style.pointerEvents='auto';setTimeout(()=>{t.style.opacity='0';t.style.transform='translate(-50%,16px)';t.style.pointerEvents='none'},3500)}
-
+function showToast(m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;t.style.opacity='1';t.style.transform='translate(-50%,0)';t.style.pointerEvents='auto';setTimeout(()=>{t.style.opacity='0';t.style.transform='translate(-50%,16px)';t.style.pointerEvents='none'},3500)}
 document.getElementById('bookBtn').addEventListener('click',()=>showToast('Booking page opening — we\'ll see you soon! ✨'));
 document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();showToast('Appointment request received! We\'ll confirm within 24 hours.');e.target.reset()});
 
 // ===== MOBILE MENU =====
-const mMenu=document.getElementById('mobileMenu'),mOverlay=document.getElementById('mobileOverlay');
-function openM(){mMenu.style.transform='translateX(0)';mOverlay.style.opacity='1';mOverlay.style.pointerEvents='auto';document.body.style.overflow='hidden'}
-function closeM(){mMenu.style.transform='translateX(100%)';mOverlay.style.opacity='0';mOverlay.style.pointerEvents='none';document.body.style.overflow=''}
-document.getElementById('mobileToggle').addEventListener('click',openM);
-document.getElementById('mobileClose').addEventListener('click',closeM);
-mOverlay.addEventListener('click',closeM);
-document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',closeM));
+const mM=document.getElementById('mobileMenu'),mO=document.getElementById('mobileOverlay');
+function oM(){mM.style.transform='translateX(0)';mO.style.opacity='1';mO.style.pointerEvents='auto';document.body.style.overflow='hidden'}
+function cM(){mM.style.transform='translateX(100%)';mO.style.opacity='0';mO.style.pointerEvents='none';document.body.style.overflow=''}
+document.getElementById('mobileToggle').addEventListener('click',oM);
+document.getElementById('mobileClose').addEventListener('click',cM);mO.addEventListener('click',cM);
+document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',cM));
 
 // ===== BACK TO TOP =====
 const btt=document.getElementById('backToTop');
